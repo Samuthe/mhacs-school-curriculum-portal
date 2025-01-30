@@ -40,9 +40,14 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'STUDENT',
     'crispy_forms',
+    'crispy_bootstrap4',
     "ckeditor",
 ]
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -82,7 +87,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'srs4',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'Hacs!1tack',
         'HOST':'127.0.0.1',
         'PORT':'3306',
     }
@@ -210,10 +215,10 @@ JAZZMIN_SETTINGS = {
     "site_title": "",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "AIMS",
+    "site_header": "ARIKA EDTECH",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "AIMS",
+    "site_brand": "TECHQUEST",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     
@@ -225,16 +230,16 @@ JAZZMIN_SETTINGS = {
     "login_logo_dark": None,
 
     # CSS classes that are applied to the logo above
-    "site_logo_classes": "img-circle",
+    "site_logo_classes": "",
 
     # Relative path to a favicon for your site, will default to site_logo if absent (ideally 32x32 px)
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "AIMS",
+    "welcome_sign": "ARIKA EDTECH",
 
     # Copyright on the footer
-    "copyright": "AIMS",
+    "copyright": "ARIKA EDTECH",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 

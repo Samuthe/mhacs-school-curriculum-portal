@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 
+
 program_list=(
 ('Bachelor Commerce in Procurement and Logistics Management','Bachelor Commerce in Procurement and Logistics Management'),
 ('Bachelor of Arts in Cultural Heritage and Tourism','Bachelor of Arts in Cultural Heritage and Tourism'),
