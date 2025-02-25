@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  db:
+    image: mysql:5.7
+    restart: always
+    environment:
+      MYSQL_DATABASE: studentrecord_db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Hacs!1tack
+      MYSQL_ROOT_PASSWORD: Hacs!1tack
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  web:
+    build: .
+    command: sh -c "python manage.py migrate && gunicorn --bind 0.0.0.0:8000 studentrecord.wsgi:application"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      DJANGO_SETTINGS_MODULE: studentrecord.settings
+      DEBUG: "True"
+      DATABASE_URL: "mysql://mhacs:Hacs!1tack@db:3306/studentrecord_db"
+
+volumes:
+  mysql_data:
