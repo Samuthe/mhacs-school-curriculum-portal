@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,9 +30,11 @@ CLOUDINARY_STORAGE_SECRET_KEY = os.getenv('CLOUDINARY_STORAGE_SECRET_KEY')
 SECRET_KEY = "django-insecure-)czbo+y*@!oshajg7@j#g-cp=42z988@qgb_us5ka@hip8fu9!"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 
-ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1, mhacs-school-curriculum-portal.onrender.com').split(',')
+
+ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,mhacs-school-curriculum-portal.onrender.com').split(',')
 
 
 # Application definition
@@ -99,12 +102,19 @@ WSGI_APPLICATION = "studentrecord.wsgi.application"
 #     }
 # }
 
+
+
 DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-        }
+    'default': dj_database_url.config(default=os.getenv('postgresql://mhacs_db_user:0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M@dpg-cuv5b656l47c738nqgug-a.oregon-postgres.render.com/mhacs_db'))
 }
+
+
+# DATABASES = {
+#         'default': {
+#             'ENGINE': 'django.db.backends.sqlite3',
+#             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#         }
+# }
 
 
 # Password validation
@@ -149,12 +159,21 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-STATIC_URL = "static/"
-MEDIA_URL='images/'
 MEDIA_ROOT=BASE_DIR /'static'
 STATICFILES_DIRS=[
     BASE_DIR/'static'
 ]
+
+INSTALLED_APPS += ['whitenoise.runserver_nostatic']
+MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
+STATIC_URL = '/static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+MEDIA_URL = '/media/'
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 
 CKEDITOR_CONFIGS = {
     'default': {
