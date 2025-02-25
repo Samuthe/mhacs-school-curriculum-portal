@@ -66,4 +66,6 @@ watchdog==3.0.0
 zipp==3.15.0
 crispy-bootstrap4
 gunicorn
+dj-database-url
+
 
