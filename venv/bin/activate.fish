@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/mhacs/Desktop/auth-sys/Django-User-authentication-system/venv
+set -gx VIRTUAL_ENV /home/mhacs/Desktop/Arika/arika-school-curriculum-portal-project/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH

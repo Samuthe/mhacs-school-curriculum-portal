@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV=/home/mhacs/Desktop/auth-sys/Django-User-authentication-system/venv
+VIRTUAL_ENV=/home/mhacs/Desktop/Arika/arika-school-curriculum-portal-project/venv
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
