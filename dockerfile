@@ -44,7 +44,7 @@ EXPOSE 8000
 
 # Add entrypoint script
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.
+RUN chmod +x /docker-entrypoint.sh
 
 
 
