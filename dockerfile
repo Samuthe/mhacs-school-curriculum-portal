@@ -37,12 +37,18 @@ ENV PYTHONUNBUFFERED=1
 # Create media directory for CKEditor
 RUN mkdir -p /app/media/uploads/ckeditor
 
+RUN pip install psycopg2-binary
+
 # Expose port 8000 for Gunicorn
 EXPOSE 8000
 
 # Add entrypoint script
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.
+
+
 
 # Use entrypoint script to run Django commands
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
+
