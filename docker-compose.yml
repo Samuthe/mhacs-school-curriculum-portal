@@ -2,17 +2,16 @@ version: '3.9'
 
 services:
   db:
-    image: mysql:5.7
+    image: postgres:15
     restart: always
     environment:
-      MYSQL_DATABASE: studentrecord_db
-      MYSQL_USER: root
-      MYSQL_PASSWORD: Hacs!1tack
-      MYSQL_ROOT_PASSWORD: Hacs!1tack
+      POSTGRES_DB: studentrecord_db
+      POSTGRES_USER: mhacs_db_user
+      POSTGRES_PASSWORD: 0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M
     ports:
-      - "3306:3306"
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres_data:/var/lib/postgresql/data
 
   web:
     build: .
@@ -26,11 +25,7 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: studentrecord.settings
       DEBUG: "True"
-      DATABASE_URL: "postgresql://mhacs_db_user:0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M@dpg-cuv5b656l47c738nqgug-a.oregon-postgres.render.com/mhacs_db"
-
-environment:
-  - DATABASE_URL=postgresql://mhacs_db_user:0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M@dpg-cuv5b656l47c738nqgug-a.oregon-postgres.render.com/mhacs_db
-
+      DATABASE_URL: "postgresql://mhacs_db_user:0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M@db:5432/studentrecord_db"
 
 volumes:
-  mysql_data:
+  postgres_data:
