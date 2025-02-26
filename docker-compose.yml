@@ -26,7 +26,7 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: studentrecord.settings
       DEBUG: "True"
-      DATABASE_URL: "mysql://mhacs:Hacs!1tack@db:3306/studentrecord_db"
+      DATABASE_URL: "postgresql://mhacs_db_user:0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M@dpg-cuv5b656l47c738nqgug-a.oregon-postgres.render.com/mhacs_db"
 
 volumes:
   mysql_data:
