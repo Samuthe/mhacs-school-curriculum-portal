@@ -4,11 +4,17 @@ WORKDIR /app
 
 # Install system dependencies for MySQL & Django dependencies
 RUN apt-get update && apt-get install -y \
+    python3-dev \
+    default-libmysqlclient-dev \
+    build-essential \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && apt-get install -y \
     mariadb-client \
     libmariadb-dev \
     # mariadb-dev \
     build-essential \
-    python3-dev \
     libsqlite3-dev \
     curl \
     ca-certificates \
