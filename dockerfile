@@ -2,24 +2,12 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-# Install system dependencies for MySQL & Django dependencies
+# Install system dependencies for PostgreSQL & Django
 RUN apt-get update && apt-get install -y \
     python3-dev \
-    default-libmysqlclient-dev \
     build-essential \
     pkg-config \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN apt-get update && apt-get install -y \
-    mariadb-client \
-    libmariadb-dev \
-    # mariadb-dev \
-    build-essential \
-    libsqlite3-dev \
-    curl \
-    ca-certificates \
-    gnupg \
-    lsb-release \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
@@ -37,6 +25,7 @@ ENV PYTHONUNBUFFERED=1
 # Create media directory for CKEditor
 RUN mkdir -p /app/media/uploads/ckeditor
 
+# Install PostgreSQL client
 RUN pip install psycopg2-binary
 
 # Expose port 8000 for Gunicorn
@@ -46,9 +35,5 @@ EXPOSE 8000
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-
-
 # Use entrypoint script to run Django commands
 ENTRYPOINT ["/docker-entrypoint.sh"]
-
-
