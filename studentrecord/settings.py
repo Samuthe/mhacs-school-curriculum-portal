@@ -101,6 +101,7 @@ DATABASES = {
         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
         'HOST': os.getenv('POSTGRES_HOST'),# Or the database server address
         'PORT': os.getenv('POSTGRES_PORT'),  # Default PostgreSQL port (change if using another DB)
+        'DATABASE_URL': os.getenv('DATABASE_URL')
     }
 }
 
