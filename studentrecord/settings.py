@@ -102,10 +102,8 @@ WSGI_APPLICATION = "studentrecord.wsgi.application"
 #     }
 # }
 
-
-
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('postgresql://mhacs_db_user:0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M@dpg-cuv5b656l47c738nqgug-a.oregon-postgres.render.com/mhacs_db'))
+    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
 }
 
 
