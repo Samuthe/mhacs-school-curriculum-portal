@@ -6,7 +6,7 @@ services:
     restart: always
     environment:
       POSTGRES_DB: mhacs_db
-      POSTGRES_USER: mhacs_db_user
+      POSTGRES_USER: mhacs
       POSTGRES_PASSWORD: 0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M
     ports:
       - "5432:5432"
