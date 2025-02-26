@@ -47,7 +47,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'studentrecord',
     'STUDENT',
+    # 'cloudinary_storage',
     'crispy_forms',
     'crispy_bootstrap4',
     "ckeditor",
@@ -91,20 +93,24 @@ WSGI_APPLICATION = "studentrecord.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     "default": {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': 'srs4',
-#         'USER':'root',
-#         'PASSWORD':'Hacs!1tack',
-#         'HOST':'127.0.0.1',
-#         'PORT':'3306',
-#     }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Change based on your database
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),# Or the database server address
+        'PORT': os.getenv('POSTGRES_PORT'),  # Default PostgreSQL port (change if using another DB)
+    }
 }
+
+
+
+
+
+# DATABASES = {
+#     'default': dj_database_url.config(default=os.getenv('DATABASE_URL'))
+# }
 
 
 # DATABASES = {
