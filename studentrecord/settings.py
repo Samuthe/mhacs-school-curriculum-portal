@@ -13,17 +13,47 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
+
 # from dotenv import load_dotenv
 
 # load_dotenv()
 
+INSTALLED_APPS = [
+    "jazzmin",
+    "django.contrib.admin",
+    "django.contrib.auth",
+    "django.contrib.contenttypes",
+    "django.contrib.sessions",
+    "django.contrib.messages",
+    "django.contrib.staticfiles",
+    'studentrecord',
+    'STUDENT',
+    'crispy_forms',
+    'crispy_bootstrap4',
+    "django_ckeditor_5",
+    "cloudinary_storage",
+    "cloudinary",
+    
+]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+
+
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-CLOUDINARY_STORAGE_NAME_KEY = os.getenv('CLOUDINARY_STORAGE_NAME_KEY')
-CLOUDINARY_STORAGE_API_KEY = os.getenv('CLOUDINARY_STORAGE_API_KEY')
-CLOUDINARY_STORAGE_SECRET_KEY = os.getenv('CLOUDINARY_STORAGE_SECRET_KEY')
+CLOUDINARY_STORAGE_NAME_KEY = os.getenv('CLOUD_NAME')
+CLOUDINARY_STORAGE_API_KEY = os.getenv('API_KEY')
+CLOUDINARY_STORAGE_SECRET_KEY = os.getenv('API_SECRET')
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -40,28 +70,6 @@ DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,mhacs-school-curriculum-portal.onrender.com').split(',')
 
 
-# Application definition
-
-INSTALLED_APPS = [
-    "jazzmin",
-    "django.contrib.admin",
-    "django.contrib.auth",
-    "django.contrib.contenttypes",
-    "django.contrib.sessions",
-    "django.contrib.messages",
-    "django.contrib.staticfiles",
-    'studentrecord',
-    'STUDENT',
-    # 'cloudinary_storage',
-    'crispy_forms',
-    'crispy_bootstrap4',
-    "ckeditor",
-]
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
-
-
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -70,6 +78,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware"
 ]
 
 ROOT_URLCONF = "studentrecord.urls"
@@ -96,25 +105,44 @@ WSGI_APPLICATION = "studentrecord.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',  # Change based on your database
-#         'NAME': os.getenv('POSTGRES_DB'),
-#         'USER': os.getenv('POSTGRES_USER'),
-#         'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
-#         'HOST': os.getenv('POSTGRES_HOST'),# Or the database server address
-#         'PORT': os.getenv('POSTGRES_PORT'),  # Default PostgreSQL port (change if using another DB)
-#         "default": dj_database_url.config(default=os.getenv("DATABASE_URL"))
+
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+# if DATABASE_URL:
+#     DATABASES = {
+#         'default': dj_database_url.config(default=DATABASE_URL)
 #     }
-# }
+# else:
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': os.getenv('POSTGRES_DB', 'mhacs_db'),
+    #         'USER': os.getenv('POSTGRES_USER', 'mhacs_db_user'),
+    #         'PASSWORD': os.getenv('POSTGRES_PASSWORD', '0dVWNIjyjgbKBZ7rNjmg52XccLJyTg4M'),
+    #         'HOST': os.getenv('POSTGRES_HOST', 'dpg-cuv5b656l47c738nqgug-a'),
+    #         'PORT': os.getenv('POSTGRES_PORT', '5432'),
+    #     }
+    # }
 
 DATABASES = {
-    'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True  # Ensure SSL is enabled
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',  # Change based on your database
+        'NAME': os.getenv('POSTGRES_DB'),
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'HOST': os.getenv('POSTGRES_HOST'),# Or the database server address
+        'PORT': os.getenv('POSTGRES_PORT'),  # Default PostgreSQL port (change if using another DB)
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         default=os.getenv('DATABASE_URL'),
+#         conn_max_age=600,
+#         ssl_require=True  # Ensure SSL is enabled
+#     )
+# }
 
 
 
@@ -193,12 +221,12 @@ DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 
-CKEDITOR_CONFIGS = {
+CKEDITOR_5_CONFIGS = {
     'default': {
         'skin': 'moono',
         # 'skin': 'office2013',
-        'toolbar_Basic': [
-            ['Source', '-', 'Bold', 'Italic']
+        'toolbar': [
+            ['Source', '-', 'Bold', 'link', '|', 'bulletedList', 'numberedList', 'blockQuote', "", 'Italic']
         ],
         'toolbar_YourCustomToolbarConfig': [
             {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
@@ -265,10 +293,10 @@ JAZZMIN_SETTINGS = {
     "site_title": "",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_header": "ARIKA EDTECH",
+    "site_header": "MHACS TECH",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "TECHQUEST",
+    "site_brand": "CHANGE WORLD",
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     
@@ -286,10 +314,10 @@ JAZZMIN_SETTINGS = {
     "site_icon": None,
 
     # Welcome text on the login screen
-    "welcome_sign": "ARIKA EDTECH",
+    "welcome_sign": "MHACS TECH",
 
     # Copyright on the footer
-    "copyright": "ARIKA EDTECH",
+    "copyright": "MHACS TECH",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 

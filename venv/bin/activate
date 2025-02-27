@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV=/home/mhacs/Desktop/Arika/arika-school-curriculum-portal-project/venv
+VIRTUAL_ENV=/home/mhacs/Desktop/school/mhacs-school-curriculum-portal/venv
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

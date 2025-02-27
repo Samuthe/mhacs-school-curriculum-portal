@@ -3,4 +3,9 @@ from .models import *
 
 # Register your models here.
 
-admin.site.register(Books)
+@admin.register(Books)
+class BooksAdmin(admin.ModelAdmin):
+    list_display = ('book_name', 'author', 'publication_year', 'isbn', 'program')
+
+
+# admin.site.register(Books)
