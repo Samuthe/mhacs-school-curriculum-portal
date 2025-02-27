@@ -48,9 +48,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
-CLOUDINARY_STORAGE_NAME_KEY = os.getenv('CLOUD_NAME')
-CLOUDINARY_STORAGE_API_KEY = os.getenv('API_KEY')
-CLOUDINARY_STORAGE_SECRET_KEY = os.getenv('API_SECRET')
+CLOUDINARY_STORAGE_NAME_KEY = os.getenv('CLOUDINARY_STORAGE_NAME_KEY')
+CLOUDINARY_STORAGE_API_KEY = os.getenv('CLOUDINARY_STORAGE_API_KEY')
+CLOUDINARY_STORAGE_SECRET_KEY = os.getenv('CLOUDINARY_STORAGE_SECRET_KEY')
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
@@ -107,7 +107,7 @@ WSGI_APPLICATION = "studentrecord.wsgi.application"
 
 
 
-DATABASE_URL = os.getenv("DATABASE_URL")
+# DATABASE_URL = os.getenv("DATABASE_URL")
 
 # if DATABASE_URL:
 #     DATABASES = {
