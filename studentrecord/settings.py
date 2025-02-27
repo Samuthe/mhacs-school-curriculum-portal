@@ -11,12 +11,13 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 import dj_database_url
 
 # from dotenv import load_dotenv
 
-# load_dotenv()
+load_dotenv()
 
 INSTALLED_APPS = [
     "jazzmin",
@@ -51,6 +52,7 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 CLOUDINARY_STORAGE_NAME_KEY = os.getenv('CLOUDINARY_STORAGE_NAME_KEY')
 CLOUDINARY_STORAGE_API_KEY = os.getenv('CLOUDINARY_STORAGE_API_KEY')
 CLOUDINARY_STORAGE_SECRET_KEY = os.getenv('CLOUDINARY_STORAGE_SECRET_KEY')
+# SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback-secret-key")
 
 DEFAULT_FILE_STORAGE = os.getenv('DEFAULT_FILE_STORAGE')
 CLOUDINARY_STORAGE_RESOURCE_TYPE = os.getenv('image')
