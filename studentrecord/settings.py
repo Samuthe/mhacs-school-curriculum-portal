@@ -216,6 +216,11 @@ STATICFILES_DIRS=[
 INSTALLED_APPS += ['whitenoise.runserver_nostatic']
 MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
 
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
