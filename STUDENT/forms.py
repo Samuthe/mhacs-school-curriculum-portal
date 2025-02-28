@@ -1,7 +1,9 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django_ckeditor_5.widgets import CKEditor5Widget
+from django.db import models
 from .models import User, Student, Books
+from django.utils.timezone import make_aware
 
 # ----------------- User Registration Form ----------------- #
 class RegisterForm(UserCreationForm):
@@ -19,7 +21,9 @@ class RegisterForm(UserCreationForm):
 
 # ----------------- Book Form with CKEditor5 ----------------- #
 class BooksForm(forms.ModelForm):
-    description = forms.CharField(widget=CKEditor5Widget(config_name="default"), required=False)  # Ensure config_name is set
+    description = models.TextField()  # Ensure config_name is set
+
+    # description = forms.CharField(widget=CKEditor5Widget(config_name="default"), required=False)  # Ensure config_name is set
 
     class Meta:
         model = Books
